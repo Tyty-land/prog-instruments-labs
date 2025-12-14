@@ -4,7 +4,9 @@ import pandas as pd
 from typing import List
 def ReaderCsv(data_frame: str) -> List[list]:
     """
-    The function is designed to read data from a DataFrame into a new list line by line,  applying the necessary data transformations for the program
+    The function is designed to read data from
+    a DataFrame into a new list line by line,
+    applying the necessary data transformations for the program
     :param data_frame: The path or name to the DataFrame (.csv)
     :return data_list: List of image data
     """
@@ -17,7 +19,8 @@ def ReaderCsv(data_frame: str) -> List[list]:
                 data_list[i] = data_list[i].split(
                     ";")
     return data_list
-def writer_csv(DataImgs: List[list], data_frame: str, index_start: int) -> None:
+def writer_csv(DataImgs: List[list], data_frame: str,
+               index_start: int) -> None:
     """
     This function creates a DataFrame of images in the format (.csv)
     according to the appropriate parameters,
@@ -52,11 +55,12 @@ def pandas_statistical_calculation(data_frame: str) -> List[list]:
     :param data_frame: The path or name to the DataFrame (.csv)
     :return statistical_list: List of statistical data
     """
-    DataImgs = reader_csv(data_frame)
+    DataImgs = ReaderCsv(data_frame)
     writer_csv(DataImgs, 'data_frame_pandas.csv', 1)
     df =pd.read_csv(
         'data_frame_pandas.csv', delimiter=';', names=DataImgs[0])
-    statistical_list = [stat_key("Height:", df), stat_key("Width:", df), stat_key("Color_depth:", df)]
+    statistical_list = [stat_key("Height:", df),
+                        stat_key("Width:", df), stat_key("Color_depth:", df)]
     os.remove('data_frame_pandas.csv')
     return statistical_list
 
@@ -65,8 +69,10 @@ def pandas_statistical_calculation(data_frame: str) -> List[list]:
 
 def stat_key(column_name: str, df: pd)->List[int]:
     """
-    The function is needed to generate statistical data on the corresponding column
-    :param column_name: The name of the column from which you want to calculate statistical data
+    The function is needed to generate statistical
+    data on the corresponding column
+    :param column_name: The name of the column
+    from which you want to calculate statistical data
     :param df: DataFrame formed by Pandas
     :return statistical_list_piece: column statistics (piece)
     """
