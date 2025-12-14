@@ -46,7 +46,7 @@ def main() -> None:
     writer_csv(Getdata_imgs(f'{save_dir}image_{key_word}_dir'),
                data_frame, 0)
     print("\n[@] - Statistical data obtained using Pandas:\n")
-    pd_st=pandas_statistical_calculation(data_frame)
+    pd_st = pandas_statistical_calculation(data_frame)
     for i in range(len(pd_st)):
         for j in range(len(pd_st[i])):
             print(pd_st[i][j], "\n")

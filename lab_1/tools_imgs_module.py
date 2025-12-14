@@ -10,8 +10,7 @@ from tools_dataframe_module import ReaderCsv
 
 CONST_activ_dir = os.getcwd().replace("\\", "/").lower() + "/"
 
-def Getdata_imgs(absolut_save_dir:
-str) -> List[list]:
+def Getdata_imgs(absolut_save_dir: str) -> List[list]:
     """
     The function prepares information about the 
     pictures contained in the corresponding folder,
@@ -25,13 +24,13 @@ str) -> List[list]:
     for image in images:
         relative_save_dir = absolut_save_dir
         if CONST_activ_dir in relative_save_dir:
-            relative_save_dir = relative_save_dir.replace(CONST_activ_dir, "/")
+            relative_save_dir = relative_save_dir.replace(
+                CONST_activ_dir, "/")
         img = cv2.imread(f"{absolut_save_dir}"
                          f"/{image}")
         height, width = img.shape[:-1]
-        depth_color = \
-            math.ceil((os.path.getsize(f"{absolut_save_dir}/{image}")*8) /
-                      (height*width))
+        depth_color = math.ceil((os.path.getsize(
+                f"{absolut_save_dir}/{image}")*8) / (height*width))
         row = [f"{absolut_save_dir}/{image}",
                f"{relative_save_dir}/{image}", height, width, depth_color]
         data_imgs.append(row)

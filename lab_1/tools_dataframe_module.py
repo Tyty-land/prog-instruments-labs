@@ -39,10 +39,8 @@ def writer_csv(DataImgs: List[list], data_frame: str,
         with open(data_frame,
                   mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file, delimiter=';')
-            for i_row in range(index_start,
-                               len(DataImgs)):
-                writer.writerow(
-                    DataImgs[i_row])
+            for i_row in range(index_start, len(DataImgs)):
+                writer.writerow(DataImgs[i_row])
 
 def demonstration_of_results(data_frame: str) -> None:
     """
