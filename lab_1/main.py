@@ -8,7 +8,7 @@ from tools_lab_module import data_frame_filter, sort_square_images
 
 from icrawler.builtin import GoogleImageCrawler
 from typing import Tuple
-def Det_p()->Tuple[str, str, str]:
+def Det_p() -> Tuple[str, str, str]:
     """
      A function that accepts command-line parameters, namely:
         -k = keyword to search for a photo (default = "None")
@@ -19,15 +19,15 @@ def Det_p()->Tuple[str, str, str]:
         tuple and returns this tuple
     :return res_tuple: a tuple containing all three cmd parameters
     """
-    p_cmd= argparse.ArgumentParser()
+    p_cmd = argparse.ArgumentParser()
     p_cmd.add_argument("-k", "--keyword", type=str,
                        help="keyword", default="None")
     p_cmd.add_argument("-sd", "--save_dir", type=str,
                        help="save dir", default="")
     p_cmd.add_argument("-D", "--data_frame", type=str,
                        help="data frame file", default="DataFrame.csv")
-    args =p_cmd.parse_args()
-    res_tuple=(args.keyword, createAbsolut_dir(args.save_dir),
+    args = p_cmd.parse_args()
+    res_tuple = (args.keyword, createAbsolut_dir(args.save_dir),
                createAbsolut_dir(args.data_frame))
     return res_tuple
 
@@ -41,7 +41,7 @@ def main() -> None:
      as well as statistical data obtained by Pandas
     :return None:
     """
-    key_word,save_dir,data_frame =Det_p()
+    key_word, save_dir, data_frame = Det_p()
     google_crawl = GoogleImageCrawler(
         storage={'root_dir': f'{save_dir}image_{key_word}_dir'})
     google_crawl.crawl(keyword=key_word, max_num=10)
@@ -61,5 +61,5 @@ def main() -> None:
     print("[@] - Sorted by the added column of DataFrame areas:")
     demonstration_of_results(data_frame)
     display_histogram(data_frame, 5)
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

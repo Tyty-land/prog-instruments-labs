@@ -11,9 +11,9 @@ def ReaderCsv(data_frame: str) -> List[list]:
     :return data_list: List of image data
     """
     with open(data_frame, 'r', encoding='utf-8') as data:
-        data_list= data.read().split("\n")
+        data_list = data.read().split("\n")
         for i in range(len(data_list)):
-            if data_list[i] =="":
+            if data_list[i] == "":
                 data_list.pop(i)
             else:
                 data_list[i] = data_list[i].split(
@@ -32,7 +32,7 @@ def writer_csv(DataImgs: List[list], data_frame: str,
     :param index_start: Starting index
     :return None:
     """
-    if index_start<len(DataImgs):
+    if index_start < len(DataImgs):
         with open(data_frame,
                   mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file, delimiter=';')
@@ -40,7 +40,7 @@ def writer_csv(DataImgs: List[list], data_frame: str,
                                len(DataImgs)):
                 writer.writerow(
                     DataImgs[i_row])
-def demonstration_of_results(data_frame: str)-> None:
+def demonstration_of_results(data_frame: str) -> None:
     """
     This function outputs several DataFrame lines
     :param data_frame: The path or name to the DataFrame (.csv)
@@ -67,7 +67,7 @@ def pandas_statistical_calculation(data_frame: str) -> List[list]:
 
 
 
-def stat_key(column_name: str, df: pd)->List[int]:
+def stat_key(column_name: str, df: pd) -> List[int]:
     """
     The function is needed to generate statistical
     data on the corresponding column
