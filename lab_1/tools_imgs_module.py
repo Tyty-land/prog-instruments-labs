@@ -37,11 +37,6 @@ str) -> List[list]:
         data_imgs.append(row)
     return data_imgs
 
-
-
-
-
-
 def createAbsolut_dir(save_dir: str) -> str:
     """
     The function checks whether a folder with photos is being
@@ -66,6 +61,7 @@ def createAbsolut_dir(save_dir: str) -> str:
     else:
         absolut_dir = save_dir.replace("\\", "/").replace("//", "/")
         return absolut_dir
+
 def display_histogram(data_frame: str, i_sort_param: int) -> None:
     """
     The function is needed to display a histogram

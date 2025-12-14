@@ -28,7 +28,6 @@ def data_frame_filter(data_frame: str, height_max: int,
             i += 1
     writer_csv(data_imgs, data_frame, 0)
 
-
 def sort_square_images(data_frame: str) -> None:
     """
     The function adds a new column of information
@@ -45,7 +44,6 @@ def sort_square_images(data_frame: str) -> None:
         data_imgs[i_row].append(str(int(data_imgs[i_row][2]) *
                                     int(data_imgs[i_row][3])))
     writer_csv(sort_data(data_imgs, 5), data_frame, 0)
-
 
 def sort_data(data_imgs: List[list], i_sort_param: int) -> List[list]:
     """

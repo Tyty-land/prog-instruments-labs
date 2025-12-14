@@ -31,8 +31,6 @@ def Det_p() -> Tuple[str, str, str]:
                createAbsolut_dir(args.data_frame))
     return res_tuple
 
-
-
 def main() -> None:
     """
     The main function that performs the basic logic of the program.
@@ -61,5 +59,7 @@ def main() -> None:
     print("[@] - Sorted by the added column of DataFrame areas:")
     demonstration_of_results(data_frame)
     display_histogram(data_frame, 5)
+
+
 if __name__ == '__main__':
     main()

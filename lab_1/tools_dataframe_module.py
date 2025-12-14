@@ -21,6 +21,7 @@ def ReaderCsv(data_frame: str) -> List[list]:
                 data_list[i] = data_list[i].split(
                     ";")
     return data_list
+
 def writer_csv(DataImgs: List[list], data_frame: str,
                index_start: int) -> None:
     """
@@ -42,6 +43,7 @@ def writer_csv(DataImgs: List[list], data_frame: str,
                                len(DataImgs)):
                 writer.writerow(
                     DataImgs[i_row])
+
 def demonstration_of_results(data_frame: str) -> None:
     """
     This function outputs several DataFrame lines
@@ -50,6 +52,7 @@ def demonstration_of_results(data_frame: str) -> None:
     """
     df = pd.read_csv(data_frame, delimiter=';')
     print("\n", df.head(), "\n")
+
 def pandas_statistical_calculation(data_frame: str) -> List[list]:
     """
     Pandas statistics on images from the corresponding DataFrame.
@@ -65,9 +68,6 @@ def pandas_statistical_calculation(data_frame: str) -> List[list]:
                         stat_key("Width:", df), stat_key("Color_depth:", df)]
     os.remove('data_frame_pandas.csv')
     return statistical_list
-
-
-
 
 def stat_key(column_name: str, df: pd) -> List[int]:
     """
