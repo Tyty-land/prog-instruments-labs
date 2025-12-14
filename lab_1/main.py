@@ -4,11 +4,11 @@ from typing import Tuple
 
 from tools_dataframe_module import writer_csv, \
     pandas_statistical_calculation, demonstration_of_results
-from tools_imgs_module import createAbsolut_dir, \
-    Getdata_imgs, display_histogram
+from tools_imgs_module import create_absolut_dir, \
+    get_data_imgs, display_histogram
 from tools_lab_module import data_frame_filter, sort_square_images
 
-def Det_p() -> Tuple[str, str, str]:
+def get_p() -> Tuple[str, str, str]:
     """
      A function that accepts command-line parameters, namely:
         -k = keyword to search for a photo (default = "None")
@@ -27,8 +27,8 @@ def Det_p() -> Tuple[str, str, str]:
     p_cmd.add_argument("-D", "--data_frame", type=str,
                        help="data frame file", default="DataFrame.csv")
     args = p_cmd.parse_args()
-    res_tuple = (args.keyword, createAbsolut_dir(args.save_dir),
-               createAbsolut_dir(args.data_frame))
+    res_tuple = (args.keyword, create_absolut_dir(args.save_dir),
+               create_absolut_dir(args.data_frame))
     return res_tuple
 
 def main() -> None:
@@ -39,11 +39,11 @@ def main() -> None:
      as well as statistical data obtained by Pandas
     :return None:
     """
-    key_word, save_dir, data_frame = Det_p()
+    key_word, save_dir, data_frame = get_p()
     google_crawl = GoogleImageCrawler(
         storage={'root_dir': f'{save_dir}image_{key_word}_dir'})
     google_crawl.crawl(keyword=key_word, max_num=10)
-    writer_csv(Getdata_imgs(f'{save_dir}image_{key_word}_dir'),
+    writer_csv(get_data_imgs(f'{save_dir}image_{key_word}_dir'),
                data_frame, 0)
     print("\n[@] - Statistical data obtained using Pandas:\n")
     pd_st = pandas_statistical_calculation(data_frame)

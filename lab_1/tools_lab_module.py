@@ -1,7 +1,7 @@
 import os
 from typing import List
 
-from tools_dataframe_module import ReaderCsv, writer_csv
+from tools_dataframe_module import reader_csv, writer_csv
 
 def data_frame_filter(data_frame: str,
                       height_max: int, width_max: int) -> None:
@@ -15,7 +15,7 @@ def data_frame_filter(data_frame: str,
     :param width_max: Information from Pandas about the maximum width
     :return None:
     """
-    data_imgs = ReaderCsv(data_frame)
+    data_imgs = reader_csv(data_frame)
     os.remove(data_frame)
     i = 1
     end = len(data_imgs)
@@ -37,7 +37,7 @@ def sort_square_images(data_frame: str) -> None:
     :param data_frame: The path or name to the DataFrame (.csv)
     :return None:
     """
-    data_imgs = ReaderCsv(data_frame)
+    data_imgs = reader_csv(data_frame)
     os.remove(data_frame)
     data_imgs[0].append("Square:")
     for i_row in range(1, len(data_imgs)):

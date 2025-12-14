@@ -4,7 +4,7 @@ import csv
 import pandas as pd
 from typing import List
 
-def ReaderCsv(data_frame: str) -> List[list]:
+def reader_csv(data_frame: str) -> List[list]:
     """
     The function is designed to read data from
     a DataFrame into a new list line by line,
@@ -22,7 +22,7 @@ def ReaderCsv(data_frame: str) -> List[list]:
                     ";")
     return data_list
 
-def writer_csv(DataImgs: List[list], data_frame: str,
+def writer_csv(data_imgs: List[list], data_frame: str,
                index_start: int) -> None:
     """
     This function creates a DataFrame of images in the format (.csv)
@@ -35,12 +35,12 @@ def writer_csv(DataImgs: List[list], data_frame: str,
     :param index_start: Starting index
     :return None:
     """
-    if index_start < len(DataImgs):
+    if index_start < len(data_imgs):
         with open(data_frame,
                   mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file, delimiter=';')
-            for i_row in range(index_start, len(DataImgs)):
-                writer.writerow(DataImgs[i_row])
+            for i_row in range(index_start, len(data_imgs)):
+                writer.writerow(data_imgs[i_row])
 
 def demonstration_of_results(data_frame: str) -> None:
     """
@@ -58,10 +58,10 @@ def pandas_statistical_calculation(data_frame: str) -> List[list]:
     :param data_frame: The path or name to the DataFrame (.csv)
     :return statistical_list: List of statistical data
     """
-    DataImgs = ReaderCsv(data_frame)
-    writer_csv(DataImgs, 'data_frame_pandas.csv', 1)
-    df =pd.read_csv(
-        'data_frame_pandas.csv', delimiter=';', names=DataImgs[0])
+    data_imgs = reader_csv(data_frame)
+    writer_csv(data_imgs, 'data_frame_pandas.csv', 1)
+    df = pd.read_csv(
+        'data_frame_pandas.csv', delimiter=';', names=data_imgs[0])
     statistical_list = [stat_key("Height:", df),
                         stat_key("Width:", df), stat_key("Color_depth:", df)]
     os.remove('data_frame_pandas.csv')

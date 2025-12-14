@@ -6,11 +6,11 @@ from typing import List
 import cv2
 import matplotlib.pyplot as plt
 
-from tools_dataframe_module import ReaderCsv
+from tools_dataframe_module import reader_csv
 
 CONST_activ_dir = os.getcwd().replace("\\", "/").lower() + "/"
 
-def Getdata_imgs(absolut_save_dir: str) -> List[list]:
+def get_data_imgs(absolut_save_dir: str) -> List[list]:
     """
     The function prepares information about the 
     pictures contained in the corresponding folder,
@@ -30,13 +30,13 @@ def Getdata_imgs(absolut_save_dir: str) -> List[list]:
                          f"/{image}")
         height, width = img.shape[:-1]
         depth_color = math.ceil((os.path.getsize(
-                f"{absolut_save_dir}/{image}")*8) / (height*width))
+            f"{absolut_save_dir}/{image}") * 8) / (height * width))
         row = [f"{absolut_save_dir}/{image}",
                f"{relative_save_dir}/{image}", height, width, depth_color]
         data_imgs.append(row)
     return data_imgs
 
-def createAbsolut_dir(save_dir: str) -> str:
+def create_absolut_dir(save_dir: str) -> str:
     """
     The function checks whether a folder with photos is being
     created in the new directory of the current directory
@@ -70,7 +70,7 @@ def display_histogram(data_frame: str, i_sort_param: int) -> None:
     :param i_sort_param: The second index of the list item
     :return None:
     """
-    data_imgs = ReaderCsv(data_frame)
+    data_imgs = reader_csv(data_frame)
     x = []
     for i in range(1, len(data_imgs)):
         x.append(int(data_imgs[i][i_sort_param]))
@@ -82,4 +82,3 @@ def display_histogram(data_frame: str, i_sort_param: int) -> None:
     plt.axhline(0, color='black', linewidth=0.5, ls='--')
     plt.axvline(0, color='black', linewidth=0.5, ls='--')
     plt.show()
-
