@@ -1,7 +1,9 @@
-import csv
 import os
+
+import csv
 import pandas as pd
 from typing import List
+
 def ReaderCsv(data_frame: str) -> List[list]:
     """
     The function is designed to read data from

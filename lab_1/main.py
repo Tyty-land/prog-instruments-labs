@@ -1,4 +1,6 @@
 import argparse
+from icrawler.builtin import GoogleImageCrawler
+from typing import Tuple
 
 from tools_dataframe_module import writer_csv, \
     pandas_statistical_calculation, demonstration_of_results
@@ -6,8 +8,6 @@ from tools_imgs_module import createAbsolut_dir, \
     Getdata_imgs, display_histogram
 from tools_lab_module import data_frame_filter, sort_square_images
 
-from icrawler.builtin import GoogleImageCrawler
-from typing import Tuple
 def Det_p() -> Tuple[str, str, str]:
     """
      A function that accepts command-line parameters, namely:
