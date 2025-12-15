@@ -1,5 +1,8 @@
 import os
 import re
+import logging
+
+logger = logging.getLogger('ImageProcessor.PathUtils')
 
 CONST_activ_dir = os.getcwd().replace("\\", "/").lower() + "/"
 
@@ -23,7 +26,18 @@ def create_absolut_dir(path_save: str) -> str:
     :param path_save: path to the save folder (maybe relative)
     :return absolut_dir: absolute path to the save folder
     """
+    original_path = path_save
+
     if re.search(r"\w:/", path_save) is None:
         path_save = CONST_activ_dir + path_save
+        logger.debug(f"Относительный путь '{original_path}' преобразован в абсолютный: '{path_save}'")
+    else:
+        logger.debug(f"Путь уже абсолютный: '{path_save}'")
+
     absolut_dir = (path_save + "/").replace("\\", "/").replace("//", "/")
+
+    # ЛОГИРОВАНИЕ: результат преобразования
+    if absolut_dir != original_path:
+        logger.info(f"Преобразован путь: '{original_path}' -> '{absolut_dir}'")
+
     return absolut_dir
