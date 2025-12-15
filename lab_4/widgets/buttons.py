@@ -1,13 +1,14 @@
 from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import QObject, pyqtSignal
 
-class NavigationButtons:
+class NavigationButtons(QObject):
     """Control of navigation buttons while maintaining the original logic"""
 
     next_clicked = pyqtSignal()
     prev_clicked = pyqtSignal()
 
     def __init__(self, parent, base_x: int = 720, base_y: int = 500):
+        super().__init__(parent)
         self.parent = parent
         self.base_x = base_x
         self.base_y = base_y

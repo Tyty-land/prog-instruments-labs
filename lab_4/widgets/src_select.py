@@ -1,16 +1,17 @@
 from PyQt5.QtWidgets import QComboBox, QLabel, QFileDialog
 from PyQt5.QtGui import QFont
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import QObject, pyqtSignal
 
-class SourceSelector:
+class SourceSelector(QObject):
     """
     A component for selecting a data source while maintaining the original logic.
     """
 
-    source_selected = pyqtSignal(str, str)
+    source_selected = pyqtSignal(str)
     text_changed = pyqtSignal(str)
 
     def __init__(self, parent, base_x: int = 720, base_y: int = 500):
+        super().__init__(parent)
         self.parent = parent
         self.base_x = base_x
         self.base_y = base_y
@@ -46,7 +47,7 @@ class SourceSelector:
             self.current_path = path
             self.combo_box.setItemText(0, path)
             self.combo_box.setCurrentIndex(0)
-            self.source_selected.emit("directory", path)
+            self.source_selected.emit(path)
 
     def _select_csv_file(self):
         """Selecting a CSV file (original logic)"""
@@ -57,7 +58,7 @@ class SourceSelector:
             self.current_path = filename[0]
             self.combo_box.setItemText(0, filename[0])
             self.combo_box.setCurrentIndex(0)
-            self.source_selected.emit("csv", filename[0])
+            self.source_selected.emit(filename[0])
 
     def update_geometry(self, window_width: int, window_height: int):
         """
