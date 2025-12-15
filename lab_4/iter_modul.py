@@ -2,6 +2,7 @@ import csv
 import os
 import re
 
+from config import CSV_DLMTR, IMG_EXTNS
 
 class KeywordPhotoIter:
     """
@@ -13,9 +14,9 @@ class KeywordPhotoIter:
 
     def __init__(self, csv_or_dir_path: str, start_or_end: bool):
         self.data_keyword = []
-        if ".csv" in csv_or_dir_path and csv_or_dir_path != "":
+        if IMG_EXTNS[5] in csv_or_dir_path and csv_or_dir_path != "":
             with open(csv_or_dir_path, 'r', newline='', encoding='utf-8') as file:
-                reader = csv.reader(file, delimiter=';')
+                reader = csv.reader(file, delimiter=CSV_DLMTR)
                 for row in reader:
                     for i in range(0, len(row)):
                         if re.search(r"^\w:/", row[i]) is not None:
@@ -25,7 +26,7 @@ class KeywordPhotoIter:
             end = len(self.data_keyword)
             i = 0
             while i < end:
-                if ".jpg" not in self.data_keyword[i] and ".png" not in self.data_keyword[i]:
+                if IMG_EXTNS[0] not in self.data_keyword[i] and IMG_EXTNS[2] not in self.data_keyword[i]:
                     self.data_keyword.pop(i)
                     end -= 1
                 else:

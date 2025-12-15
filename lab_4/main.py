@@ -4,7 +4,8 @@ from PyQt5.QtGui import QFont, QPixmap
 from PyQt5.QtWidgets import QApplication, QPushButton, QMainWindow, QLabel, QFileDialog, QComboBox
 from PyQt5 import QtCore
 
-from iter_modul import KeywordPhotoIter
+from image_iter import KeywordPhotoIter
+from config import IMG_EXTNS
 
 
 class MainWindow(QMainWindow):
@@ -39,15 +40,15 @@ class MainWindow(QMainWindow):
         self.right_button.setGeometry(self.frameGeometry().width() - (round(self.frameGeometry().width() / self.x) * 100
                                                                       ), self.frameGeometry().height() -
                                       (round(self.frameGeometry().height() / self.y) *
-                                       (70 + round(self.y / self.frameGeometry().height()) * 30))
-                                      , (round(self.frameGeometry().width() / self.x) * 100),
+                                       (70 + round(self.y / self.frameGeometry().height()) * 30)),
+                                      (round(self.frameGeometry().width() / self.x) * 100),
                                       (round(self.frameGeometry().height() / self.y) * 70))
         self.left_button = QPushButton("<--", self)
         self.left_button.clicked.connect(self.button_reg)
-        self.left_button.setGeometry(0, self.frameGeometry().height() - (round(self.frameGeometry().height() / self.y) *
-                                                                         (70 + round(
-                                                                             self.y / self.frameGeometry().height()) * 30))
-                                     , (round(self.frameGeometry().width() / self.x) * 100),
+        self.left_button.setGeometry(0, self.frameGeometry().height() -
+                                     (round(self.frameGeometry().height() / self.y) *
+                                      (70 + round(self.y / self.frameGeometry().height()) * 30)),
+                                     (round(self.frameGeometry().width() / self.x) * 100),
                                      (round(self.frameGeometry().height() / self.y) * 70))
         self.combo_label = QLabel("Выбор пути \nдо данных: ", self)
         self.combo_label.setFont(QFont('Times', 10))
@@ -75,25 +76,23 @@ class MainWindow(QMainWindow):
     # Активная часть
     def create_list_images(self, data_or_path_str) -> None:
         """
-        This method is needed to create an iterator based on photos in a folder or on a DataFrame with paths to them.
-         Next, it creates widgets of images on the screen with a certain size and a certain position,
-          this is determined by the current resolution of the main window
-        :param data_or_path_str: The path string to the folder or DataFrame may be empty
-        :return None:
+        Упрощенная версия с использованием DataLoader.
         """
         if data_or_path_str != "" and data_or_path_str != "  path" and data_or_path_str != "  .csv":
             self.Iter_imgs = KeywordPhotoIter(self.dir_or_csv, 0)
             if self.Iter_imgs.get_current_size() != 0:
                 self.current_image = self.Iter_imgs.get_current_elem()
                 self.image_label.setScaledContents(True)
-                if ".csv" not in self.dir_or_csv:
+                if ".csv" not in self.dir_or_csv:  # Можно заменить на проверку IMG_EXTNS[5]
                     self.image_label.setPixmap(QPixmap(f"{self.dir_or_csv}/{self.current_image}"))
                 else:
                     self.image_label.setPixmap(QPixmap(f"{self.current_image}"))
             self.image_label.setFixedSize(round(self.frameGeometry().width() / self.x) * 400,
                                           round(self.frameGeometry().height() / self.y) * 340)
-        if data_or_path_str == "" or self.Iter_imgs.get_current_size() == 0:
-            if self.Iter_imgs.get_current_size() != 0:
+
+        if data_or_path_str == "" or (hasattr(self, 'Iter_imgs') and
+                                      self.Iter_imgs.get_current_size() == 0):
+            if hasattr(self, 'Iter_imgs') and self.Iter_imgs.get_current_size() != 0:
                 self.Iter_imgs = KeywordPhotoIter("", 0)
             self.current_image = ""
             self.image_label.setScaledContents(False)
@@ -101,6 +100,7 @@ class MainWindow(QMainWindow):
             self.image_label.setText("_No_images_")
             self.image_label.setFont(QFont('Times', 12))
             self.image_label.setFixedSize(100, 100)
+
         self.image_label.move(round(self.frameGeometry().width() / 2)
                               - round(self.image_label.frameGeometry().width() / 2),
                               round(self.frameGeometry().height() / 2)
@@ -128,7 +128,7 @@ class MainWindow(QMainWindow):
                 else:
                     self.current_image = self.Iter_imgs.back()
             self.image_label.setScaledContents(True)
-            if ".csv" not in self.dir_or_csv:
+            if IMG_EXTNS[5] not in self.dir_or_csv:
                 self.image_label.setPixmap(QPixmap(
                     f"{self.dir_or_csv}/{self.current_image}"))
             else:
@@ -165,13 +165,13 @@ class MainWindow(QMainWindow):
         self.right_button.setGeometry(self.frameGeometry().width() - (round(self.frameGeometry().width() / self.x) * 100
                                                                       ), self.frameGeometry().height() -
                                       (round(self.frameGeometry().height() / self.y) *
-                                       (70 + round(self.y / self.frameGeometry().height()) * 30))
-                                      , (round(self.frameGeometry().width() / self.x) * 100),
+                                       (70 + round(self.y / self.frameGeometry().height()) * 30)),
+                                      (round(self.frameGeometry().width() / self.x) * 100),
                                       (round(self.frameGeometry().height() / self.y) * 70))
-        self.left_button.setGeometry(0, self.frameGeometry().height() - (round(self.frameGeometry().height() / self.y) *
-                                                                         (70 + round(
-                                                                             self.y / self.frameGeometry().height()) * 30))
-                                     , (round(self.frameGeometry().width() / self.x) * 100),
+        self.left_button.setGeometry(0, self.frameGeometry().height() -
+                                     (round(self.frameGeometry().height() / self.y) *
+                                      (70 + round(self.y / self.frameGeometry().height()) * 30)),
+                                     (round(self.frameGeometry().width() / self.x) * 100),
                                      (round(self.frameGeometry().height() / self.y) * 70))
         for i in range(30):
             self.combo_line_up[i].move(int(self.frameGeometry().width() / 2) + 75 * (i - 15),
