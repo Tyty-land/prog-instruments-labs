@@ -41,7 +41,8 @@ jobs:
              
     - name: Run tests
       run: |
-       coverage run -m pytest
+       cd lab_6
+       coverage run -m pytest unit_tests/
 
     - name: Calculate code coverage
       run: |
