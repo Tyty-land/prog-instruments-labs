@@ -1,49 +1,25 @@
 name: Unit testing for lab 6
 
-on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
-    branches:
-      - 'main'
-    paths:
-      - 'lab_6/**'
-      
-permissions:
-  contents: read
+on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout your fork
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-    
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v6
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
         python-version: "3.12"
-        
-    - name: Set env path
-      run: |
-        export PYTHONPATH=.:$PYTHONPATH:lab_6/
-        
+
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        # Если есть requirements.txt - используй его
-        if [ -f lab_6/requirements.txt ]; then pip install -r lab_6/requirements.txt; fi
-        # И всегда устанавливай эти библиотеки
-        pip install pytest pandas opencv-python coverage icrawler opencv-python-headless
-             
+        pip install pytest pandas opencv-python-headless
+
     - name: Run tests
       run: |
-       cd lab_6
-       coverage run -m pytest unit_tests/
-
-    - name: Calculate code coverage
-      run: |
-       coverage report
+        cd lab_6
+        python -c "import pandas; import cv2; print('Dependencies installed')"
+        python -m pytest unit_tests/ -v
