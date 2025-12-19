@@ -12,13 +12,12 @@ def reader_csv(data_frame: str) -> List[list]:
     :param data_frame: The path or name to the DataFrame (.csv)
     :return data_list: List of image data
     """
+    data_list = []
     with open(data_frame, 'r', encoding='utf-8') as data:
-        data_list = data.read().split("\n")
-        for i in range(len(data_list)):
-            if data_list[i] == "":
-                data_list.pop(i)
-            else:
-                data_list[i] = data_list[i].split(";")
+        csv_reader = csv.reader(data, delimiter=';')
+        for row in csv_reader:
+            if row:  # Пропускаем пустые строки
+                data_list.append(row)
     return data_list
 
 
@@ -72,23 +71,17 @@ def stat_key(column_name: str, df: pd) -> List[int]:
     :param df: DataFrame formed by Pandas
     :return statistical_list_piece: column statistics (piece)
     """
-    statistical_list_piece = [df[column_name].count(),
-                         df[column_name].sum(),
-                         df[column_name].mean(),
-                         df[column_name].median(),
-                         df[column_name].min(),
-                         df[column_name].max(),
-                         df[column_name].mode(),
-                         df[column_name].abs(),
-                         df[column_name].prod(),
-                         df[column_name].std(),
-                         df[column_name].var(),
-                         df[column_name].sem(),
-                         df[column_name].skew(),
-                         df[column_name].kurt(),
-                         df[column_name].quantile(),
-                         df[column_name].cumsum(),
-                         df[column_name].cumprod(),
-                         df[column_name].cummax(),
-                         df[column_name].cummin()]
-    return statistical_list_piece
+    col_data = df[column_name]
+
+    # Вычисляем только необходимые статистики
+    return [
+        col_data.count(),
+        col_data.sum(),
+        col_data.mean(),
+        col_data.median(),
+        col_data.min(),
+        col_data.max(),
+        col_data.mode().iloc[0] if not col_data.mode().empty else None,
+        col_data.std(),
+        col_data.var()
+    ]

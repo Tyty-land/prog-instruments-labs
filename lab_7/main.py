@@ -4,7 +4,7 @@ from tools_dataframe_module import writer_csv, pandas_statistical_calculation, d
 from tools_imgs_module import create_absolut_dir, get_data_imgs, display_histogram
 from tools_lab_module import data_frame_filter, sort_square_images
 
-from icrawler.builtin import GoogleImageCrawler
+from icrawler.builtin import BingImageCrawler
 from typing import Tuple
 
 
@@ -34,7 +34,7 @@ def main() -> None:
     :return None:
     """
     key_word, save_dir, data_frame = get_p()
-    google_crawl = GoogleImageCrawler(storage={'root_dir': f'{save_dir}image_{key_word}_dir'})
+    google_crawl = BingImageCrawler(storage={'root_dir': f'{save_dir}image_{key_word}_dir'})
     google_crawl.crawl(keyword=key_word, max_num=10)
     writer_csv(get_data_imgs(f'{save_dir}image_{key_word}_dir'), data_frame, 0)
     print("\n[@] - Statistical data obtained using Pandas:\n")
