@@ -3,9 +3,9 @@ import sys
 import tempfile
 import pytest
 
-from tools_lab_module import sort_square_images, sort_data
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from tools_lab_module import sort_data
 
 # ================== Тесты для sort_data ==================
 

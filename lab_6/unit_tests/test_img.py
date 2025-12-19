@@ -4,9 +4,9 @@ import math
 from unittest.mock import Mock, patch
 import pytest
 
-from tools_imgs_module import create_absolut_dir, get_data_imgs
-
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from tools_imgs_module import create_absolut_dir, get_data_imgs
 
 # ================== Тесты для create_absolut_dir ==================
 

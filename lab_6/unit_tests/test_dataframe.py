@@ -3,10 +3,9 @@ import sys
 import tempfile
 import pytest
 
-from tools_dataframe_module import reader_csv, writer_csv
-
-# Добавляем путь для импорта модулей из корня проекта
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from tools_dataframe_module import reader_csv, writer_csv
 
 def test_reader_csv_normal_case():
     """Тест 1: Чтение нормального CSV файла"""
