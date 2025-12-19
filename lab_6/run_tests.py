@@ -1,7 +1,3 @@
-"""
-Скрипт для запуска всех unit-тестов
-Просто запустите этот файл в PyCharm (Ctrl+Shift+F10)
-"""
 import os
 import sys
 import subprocess
