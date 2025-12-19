@@ -1,12 +1,14 @@
+from typing import Tuple
+
 import argparse
 from icrawler.builtin import GoogleImageCrawler
-from typing import Tuple
 
 from tools_dataframe_module import writer_csv, \
     pandas_statistical_calculation, demonstration_of_results
 from tools_imgs_module import create_absolut_dir, \
     get_data_imgs, display_histogram
 from tools_lab_module import data_frame_filter, sort_square_images
+
 
 def get_p() -> Tuple[str, str, str]:
     """

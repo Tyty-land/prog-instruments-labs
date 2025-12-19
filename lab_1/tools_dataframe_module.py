@@ -1,8 +1,9 @@
 import os
+from typing import List
 
 import csv
 import pandas as pd
-from typing import List
+
 
 def reader_csv(data_frame: str) -> List[list]:
     """
@@ -76,23 +77,11 @@ def stat_key(column_name: str, df: pd) -> List[int]:
     :param df: DataFrame formed by Pandas
     :return statistical_list_piece: column statistics (piece)
     """
-    statistical_list_piece = [df[column_name].count(),
-                         df[column_name].sum(),
-                         df[column_name].mean(),
-                         df[column_name].median(),
-                         df[column_name].min(),
-                         df[column_name].max(),
-                         df[column_name].mode(),
-                         df[column_name].abs(),
-                         df[column_name].prod(),
-                         df[column_name].std(),
-                         df[column_name].var(),
-                         df[column_name].sem(),
-                         df[column_name].skew(),
-                         df[column_name].kurt(),
-                         df[column_name].quantile(),
-                         df[column_name].cumsum(),
-                         df[column_name].cumprod(),
-                         df[column_name].cummax(),
-                         df[column_name].cummin()]
+    statistical_list_piece = [df[column_name].count(), df[column_name].sum(),
+      df[column_name].mean(), df[column_name].median(), df[column_name].min(),
+      df[column_name].cumprod(), df[column_name].mode(), df[column_name].abs(),
+      df[column_name].prod(), df[column_name].std(), df[column_name].var(),
+      df[column_name].cummin(), df[column_name].skew(), df[column_name].kurt(),
+      df[column_name].max(), df[column_name].cumsum(), df[column_name].sem(),
+      df[column_name].cummax(), df[column_name].quantile()]
     return statistical_list_piece
