@@ -1,6 +1,3 @@
-"""
-Unit tests for tools_lab_module.py - в виде простых функций
-"""
 import os
 import sys
 import tempfile

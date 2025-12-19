@@ -1,6 +1,3 @@
-"""
-Unit tests for tools_imgs_module.py - в виде простых функций
-"""
 import os
 import sys
 import math
