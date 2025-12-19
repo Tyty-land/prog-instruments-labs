@@ -3,7 +3,6 @@ import os
 from tools_dataframe_module import reader_csv, writer_csv
 from typing import List
 
-
 def data_frame_filter(data_frame: str, height_max: int, width_max: int) -> None:
     """
     A function from the task that filters the data in the DataFrame by
@@ -15,17 +14,13 @@ def data_frame_filter(data_frame: str, height_max: int, width_max: int) -> None:
     :return None:
     """
     data_imgs = reader_csv(data_frame)
-    os.remove(data_frame)
-    i = 1
-    end = len(data_imgs)
-    while i < end:
-        if int(data_imgs[i][2]) > height_max or int(data_imgs[i][3]) > width_max:
-            data_imgs.pop(i)
-            end -= 1
-        else:
-            i += 1
-    writer_csv(data_imgs, data_frame, 0)
+    filtered_data = [data_imgs[0]]  # Сохраняем заголовок
 
+    for i in range(1, len(data_imgs)):
+        if int(data_imgs[i][2]) <= height_max and int(data_imgs[i][3]) <= width_max:
+            filtered_data.append(data_imgs[i])
+
+    writer_csv(filtered_data, data_frame, 0)
 
 def sort_square_images(data_frame: str) -> None:
     """
@@ -35,12 +30,14 @@ def sort_square_images(data_frame: str) -> None:
     :return None:
     """
     data_imgs = reader_csv(data_frame)
-    os.remove(data_frame)
     data_imgs[0].append("Square:")
     for i_row in range(1, len(data_imgs)):
         data_imgs[i_row].append(str(int(data_imgs[i_row][2]) * int(data_imgs[i_row][3])))
-    writer_csv(sort_data(data_imgs, 5), data_frame, 0)
 
+    # Сортируем данные, начиная со второй строки (первая - заголовок)
+    data_imgs[1:] = sorted(data_imgs[1:], key=lambda x: int(x[5]))
+
+    writer_csv(data_imgs, data_frame, 0)
 
 def sort_data(data_imgs: List[list], i_sort_param: int) -> List[list]:
     """
@@ -52,18 +49,6 @@ def sort_data(data_imgs: List[list], i_sort_param: int) -> List[list]:
     :param i_sort_param: The second index of the list item
     :return data_imgs: List of image data (SORT)
     """
-    x = 2
-    while x < len(data_imgs):
-        if int(data_imgs[x][i_sort_param]) < int(data_imgs[x - 1][i_sort_param]):
-            y = x
-            while int(data_imgs[y][i_sort_param]) < int(data_imgs[y - 1][i_sort_param]):
-                tmp = data_imgs[y]
-                data_imgs[y] = data_imgs[y - 1]
-                data_imgs[y - 1] = tmp
-                y -= 1
-                if y == 1:
-                    x = 2
-                    break
-                x = y
-        x += 1
+    # Сортируем данные, начиная со второй строки (первая - заголовок)
+    data_imgs[1:] = sorted(data_imgs[1:], key=lambda x: int(x[i_sort_param]))
     return data_imgs

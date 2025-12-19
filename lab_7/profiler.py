@@ -21,7 +21,7 @@ def quick_profile():
     with open(test_file, 'w', encoding='utf-8') as f:
         f.write(test_content)
 
-    with open('profile_end.txt', 'w', encoding='utf-8') as f:
+    with open('profile_new.txt', 'w', encoding='utf-8') as f:
         # Профайлинг reader_csv
         f.write("\n1. Профайлинг reader_csv (1000 вызовов):\n")
         f.write("-" * 60 + "\n")
@@ -81,7 +81,7 @@ def quick_profile():
         elapsed_time = time.time() - start_time
 
         f.write(f"Время сортировки 5000 элементов: {elapsed_time:.4f} секунд\n")
-        f.write(f"Оценка сложности: O(n²) - время растет квадратично\n")
+        f.write(f"Оценка сложности: O(n*log(n)) - время растет меньше\n")
 
     # Удаляем временные файлы
     os.remove(test_file)
