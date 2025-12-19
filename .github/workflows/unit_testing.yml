@@ -34,9 +34,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # Если есть requirements.txt - используй его
         if [ -f lab_6/requirements.txt ]; then pip install -r lab_6/requirements.txt; fi
-        pip install pytest
-        pip install coverage
+        # И всегда устанавливай эти библиотеки
+        pip install pytest pandas opencv-python coverage icrawler opencv-python-headless
              
     - name: Run tests
       run: |
