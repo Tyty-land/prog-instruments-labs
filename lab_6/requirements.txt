@@ -1,0 +1,8 @@
+pytest~=9.0.2
+pandas~=2.3.3
+opencv-python-headless
+matplotlib~=3.10.8
+numpy~=2.2.6
+coverage
+icrawler~=0.6.10
+opencv-python~=4.12.0.88
