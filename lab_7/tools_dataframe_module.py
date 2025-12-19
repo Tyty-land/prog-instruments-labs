@@ -73,6 +73,7 @@ def stat_key(column_name: str, df: pd) -> List[int]:
     """
     col_data = df[column_name]
 
+    # Вот тут
     # Вычисляем только необходимые статистики
     return [
         col_data.count(),
